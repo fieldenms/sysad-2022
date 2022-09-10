@@ -78,11 +78,17 @@ Note that `-DemailSmtp` points to `localhost`. We will be running a local SMTP s
 mvn eclipse:eclipse -DdownloadSources -DdownloadJavadoc
 ```
 
+6. Import the project into Eclipse.
+    - Open Eclipse IDE.
+    - *File->Import->Existing Maven Projects*.
+    - Set *Root Directory* to the `airport` directory.
+    - *Finish*.
+
 `-DdownloadSources` and `-DdownloadJavadoc` options will allow you to browse the source code and documentation of project dependencies.
 
-6. Configure run configurations for Eclipse.
+7. Configure run configurations for Eclipse.
     - Open Eclipse IDE.
-    - Open a file named `PopulateDb.java`. It's located under `airport-web-server/src/main/java` inside `helsinki.dev_mod.util` package.
+    - Open a file named `PopulateDb.java`. It's located under `airport-web-server/src/main/java` inside `helsinki.dev_mod.util` package. You can also use `Ctrl+Shift+T` (`Cmd+Shift+T` on macOS) to find it quickly.
     - Right click -> *Run As* -> *Run Configurations* -> *New launch configuration* -> *Arguments* tab. 
     - In the *VM arguments* text box enter:
     ```
