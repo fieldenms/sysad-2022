@@ -13,5 +13,9 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
     grant all privileges on database test_db_1 to junit;
     create database test_db_2;
     grant all privileges on database test_db_2 to junit;
+    create database test_db_3;
+    grant all privileges on database test_db_3 to junit;
+    create database test_db_4;
+    grant all privileges on database test_db_4 to junit;
 EOSQL
 
