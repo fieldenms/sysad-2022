@@ -135,5 +135,5 @@ The following entry needs to be added:
 ```
 
 ### Next steps
-Take a break now and then head over to [devops](devops) to configure Docker, PostgreSQL, HAProxy and Sendria.
+Take a break now and then head over to [devops](devops) to configure Docker to run supporting services.
 
