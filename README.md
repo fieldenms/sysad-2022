@@ -78,13 +78,13 @@ Note that `-DemailSmtp` points to `localhost`. We will be running a local SMTP s
 mvn eclipse:eclipse -DdownloadSources -DdownloadJavadoc
 ```
 
+`-DdownloadSources` and `-DdownloadJavadoc` options will allow you to browse the source code and documentation of project dependencies.
+
 6. Import the project into Eclipse.
     - Open Eclipse IDE.
     - *File->Import->Existing Maven Projects*.
     - Set *Root Directory* to the `airport` directory.
     - *Finish*.
-
-`-DdownloadSources` and `-DdownloadJavadoc` options will allow you to browse the source code and documentation of project dependencies.
 
 7. Configure run configurations for Eclipse.
     - Open Eclipse IDE.
