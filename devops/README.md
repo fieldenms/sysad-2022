@@ -6,7 +6,7 @@ If you are running Linux you can use your package manager or follow the [instruc
 Make sure that the installed version is `18.03` or newer.
 
 ## PostgreSQL
-All required files are located in `[postgresql](postgresql)`.
+All required files are located in [`postgresql`](postgresql).
 
 When started, the container will create users `t32` and `junit` (with the usual passwords).
 It will create databases `tg_local`, and `test_db_1` .. `test_db_4`.  SQL script `create_insert_statement.sql` is applied to all of these databases.
@@ -113,6 +113,8 @@ You can find out more simply by browsing the files and reading configurations.
 
 
 ## HAProxy (for HTTPS)
+All required files are located in [`haproxy`](haproxy).
+
 If you try to launch the web-server now and head over to [https://tgdev.com](https://tgdev.com) your browser will warn yout about a self-signed certificate that can't be trusted.
 You could simply make an exception for this domain, but we recommend you to configure [HAProxy](https://www.haproxy.org/) to establish TLS for HTTP(S).
 
@@ -226,9 +228,11 @@ Follow these [instructions](https://github.com/fieldenms/tg/wiki/TLS-and-HAProxy
 
 
 ## Sendria (SMTP server)
+All required files are located in [`sendria`](sendria).
+
 The final boss is a simple local SMTP server for receiving email. This can be convenient if you want to reset your password or if your TG application has some logic that actually involves sending email to its users.
 
-Directory `[sendria/docker](sendria/docker)` contains a startup script `start_sendria.sh` that will launch the SMTP server, which has a web interface accessible at [http://localhost:1080/](http://localhost:1080/).
+Directory `docker` contains a startup script `start_sendria.sh` that will launch the SMTP server, which has a web interface accessible at [http://localhost:1080/](http://localhost:1080/).
 
 That's it! Congratulations on making it this far.
 
