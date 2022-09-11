@@ -1,6 +1,10 @@
 ## Systems Analysis and Design 2022
 
 ### Initial environment setup
+First of all, clone this repository to a suitable location on your machine:
+```
+git clone https://github.com/fieldenms/sysad-2022
+```
 
 #### Java
 We will be using Java 17. You can check your Java version by running the following command on the console: `java --version`.
