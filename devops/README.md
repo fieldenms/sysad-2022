@@ -93,7 +93,7 @@ Alternatively configure a GUI database management tool to connect to the Postgre
    Note that the significant VM argument is `-DdatabaseUri=//localhost:5432/test_db_1`.
 
 ### Miscellaneous 
-More information, such as creating users and databases, running custom SQL queries, troubleshooting - [https://github.com/fieldenms/devops/tree/master/postgresql](https://github.com/fieldenms/devops/tree/master/postgresql).
+More information, such as creating users and databases, running custom SQL queries, troubleshooting - [here](postgresql/misc.md).
 
 ## DBeaver
 [DBeaver](https://dbeaver.io) is a graphical database tool that can be used to browse the database structure, observe the changes and execute queries.
@@ -124,7 +124,7 @@ The following steps are required:
 2. Install and configure HAProxy.
 3. Register the certificate as trusted with the operating system.
 
-### Generate public/private keys and a self-signed certificate
+### 1. Generate public/private keys and a self-signed certificate
 This step involves the use of `openssl`, which needs to be installed if it isn't to proceed with this step. For Windows OS `openssl` can be downloaded from [here](https://slproweb.com/products/Win32OpenSSL.html), there is also available version for `Win64`. It is better to choose full version (not `lightweight`) for software developers.
 
 Here is a command (macOS/Linux) that can be used as a template to generate a certificate that will be usable with Chrome and Firefox:
@@ -181,7 +181,7 @@ And for Windows PC:
 type localhost.pem localhost.key >> haproxy.pem
 ```
 
-### Installing and configuring HAProxy
+### 2a. Installing and configuring HAProxy
 HAProxy version 1.9.8 is assumed. Installing HAProxy with Docker is a breeze by running:
 ```
 docker pull haproxy:1.9.8
@@ -196,7 +196,7 @@ Other files that are present:
 3. `docker/linux_start_haproxy.sh` - for **Linux** users.
 4. `docker/start_haproxy.bat` - for **Windows** users.
 
-### Adjusting `start_haproxy.sh` or `start_haproxy.bat` or `linux_start_haproxy.sh`
+### 2b. Adjusting `start_haproxy.sh` or `start_haproxy.bat` or `linux_start_haproxy.sh`
 
 The startup script contains the command to run HAProxy, which needs to include a mapping between the directory where HAProxy configuration lives locally and inside the running Docker container. Here is an excerpt from the referenced shell script:
 ```
@@ -220,11 +220,163 @@ Please note also the use of option `--restart=always`. It means that HAProxy wil
 
 And as the last step, make the script executable by running `chmod +x start_haproxy.sh`.
 
-### Note on running `haproxy` with Docker Desktop
-Some troubleshooting information can be found [here](https://github.com/fieldenms/tg/wiki/TLS-and-HAProxy-for-development/_edit#note-on-running-haproxy-with-docker-desktop).
+#### Note on running `haproxy` with Docker Desktop
+When running haproxy via Docker Desktop the error might happen. The error is in the screenshot in the red rectangle.
 
-### Register the certificate as trusted with the operating system
-Follow these [instructions](https://github.com/fieldenms/tg/wiki/TLS-and-HAProxy-for-development/_edit#register-the-certificate-as-trusted-with-the-operating-system).
+![Port bind Error](images/14-cmd_fail.png)
+
+There are two possible solutions:
+
+* As it can be seen from screenshot the problem is port `80` which for some reasons can not be accessed. In that case this port can be changed and `haproxy` run script should look like this:
+ ```
+ docker run -d ^
+            -p 8080:80 -p 443:443 -p 9000:9000^
+            --restart=always^
+            --name haproxy^
+            -v /c/Users/username/haproxy:/usr/local/etc/haproxy:ro^
+            haproxy:1.9.8
+ ```
+* Another solution requires to find the application that listens port `80` which makes it inaccessible for Docker. It might be another web server or IIS etc. `netstat -aon |find ":80"` will help to find `PID` of application that does it. It could be a case when `PID` of application is `4` which is the `SYSTEM`, then you may turn it off [this post](https://superuser.com/questions/352017/pid4-using-port-80) describes how to do that. But it might be a bit dangerous as it requires to edit register.
+
+When first time running `haproxy` you should share it with Docker Desktop. After that you can stop, start or restart it using GUI like on the picture below
+
+![Docker Desktop](images/15-docker_desktop.png).
+
+`--restart=always` option will start `haproxy` when docker starts. Docker Desktop will be added to autostart by default. For Docker Toolbox it is required to provide additional configurations to make it start on PC startup. The next batch commands should be added to autostart folder:
+
+```
+docker-machine start default
+docker run -d ^
+            -p 80:80 -p 443:443 -p 9000:9000^
+            --restart=always^
+            --name haproxy^
+            -v /c/Users/username/haproxy:/usr/local/etc/haproxy:ro^
+            haproxy:1.9.8
+```
+
+The batch file is [`docker/autostart_haproxy.bat`](haproxy/docker/autostart_haproxy.bat)
+
+### 3. Register the certificate as trusted with the operating system
+
+Now everything should be ready for us to start a TG app behind HAProxy. And this is required so that we could obtain the certificate from Chrome to register it as trusted with OS.
+
+Ordinarily the order in which TG app and HAProxy are started hardly matters. However, for the first time it highly recommended to first start a TG app and then, only after it is fully loaded, start HAProxy by running `./start_haproxy.sh`.
+
+**Please note that TG app must be started in HTTP mode, not HTTPS.** That is, use `StartOverHttp`, rather than `Start`.
+Make sure that the following lines appear in the console (e.g. Eclipse console) before starting HAProxy:
+```
+Starting the Jetty [HTTP/1.1] server on port 8091
+Starting fielden.webapp.WebUiResources application
+```
+
+If HAProxy starts with an alert about `tgdev` having no server available, as depicted in the screen capture below, then either the TG app has not started or HAProxy binding on line 104 was not correctly updated. In that case please re-read section "Adjusting `haproxy.cfg`" above and make sure it is followed properly.
+
+![ALERT: tgdev has no server available.](images/02-haproxy-tgdev-down.png)
+
+Assuming that HAProxy started without the above alert, open Chrome and load `https://tgdev.com/login`.
+
+Regardless of the OS you're using, the result should look like the screen capture below. Open the Developer Tools and switch to the Security tab.
+
+![Privacy error in Chrome](images/03-privacy-error-in-chrome.png)
+
+The steps to make our certificate trusted are different for macOS and Ubuntu. Let's start with macOS.
+
+### Making certificate trusted in macOS
+Click "View certificate" button as indicated with label 1 in the screen capture below -- a certificate dialog is opened.
+
+![View certificate in Chrome](images/04-chrome-view-certificate.png)
+
+Drag the certificate icon from the dialog to some directory in Finder. This should create file `localhost.cer` on that folder.
+
+![Drag certificate from Chrome to Finder](images/05-chrome-dnd-certificate-to-finder.png)
+
+Double click that file to open it in the Keychain Access application (this will prompt for a system password). The following screen capture shows the result of this after selecting category "Certificates" in this application to see only certificates. As you can see entry "localhost" is present.
+
+![Open certificate with Keychain Access app](images/06-macos-add-certificate-to-keychain.png)
+
+Double click entry "localhost" in the Keychain Access window, and mark it as "Always Trusted" under "Trust", option "When using this certificate".
+
+![Open certificate details in Keychain Access app and mark it Always Trusted](images/07-macos-mark-certificate-as-trusted.png)
+
+Closing this dialog will prompt for a system password to apply changes. And once applied, entry "localhost" should have a little "+" sign at the start as depicted in the screen capture below.
+
+![Trusted certificates have + sign in Keychain Access app](images/08-macos-certificate-is-trusted.png)
+
+Now close the Keychain Access app, delete file `localhost.cer` as no longer needed and refresh the page in Chrome. The page should load successfully without any privacy exceptions as per the screen capture below.
+
+![Trusted certificates have + sign in Keychain Access app](images/09-chrome-certificate-is-trusted.png)
+
+Please note that you might need to restart Chrome for it to load updated certificate policies, but it was not necessary in my case.
+
+### Making certificate trusted in Ubuntu
+
+The situation with Ubuntu is slightly more complicated, but does not requires as many screen captures (:.
+First, export the certificate from the certificate dialog, which appears after clicking button "View certificate" (the same as under macOS). The "Export" button is located in tab "Details".
+
+![Ubuntu Chrome view certificate details tab, export](images/10-chrome-ubuntu-view-certificate.png)
+
+Make sure your select option "single certificate" during the export as indicated in the screen capture below.
+Take a note of where the file is exported and the file name -- `localhost.crt`. This is needed for the steps that follow.
+
+![Ubuntu Chrome export certificate](images/11-chrome-ubuntu-view-certificate-export.png)
+
+Start a terminal and change the directory to the one where `localhost.crt` has been exported.
+Then execute the following commands:
+
+1. `sudo apt-get install libnss3-tools` — install utility `certutil`, which is needed to manage keys and certificates (you only need to install this once, the first time you want to import a certificate).
+2. `certutil -d sql:$HOME/.pki/nssdb -A -t "C,," -n localhost.crt -i localhost.crt` — import the certificate into the local database.
+3. `certutil -d sql:$HOME/.pki/nssdb -L` — this is just to list what the resultant DB contains to make sure our certificate is present.
+4. go to chrome://settings/certificates, find `org-Fielden` in `Authorities` tab, open, edit UNTRUSTED `localhost` to make it trusted
+
+This is it -- refresh the page in Chrome (may need to restart it) and the privacy exception should be no more.
+
+For Firefox users running Linux: Firefox does not have a 'central' location where it looks for certificates. It just looks into the current profile ([reference](https://askubuntu.com/questions/244582/add-certificate-authorities-system-wide-on-firefox)).
+
+2. `certutil -d $HOME/.mozilla/firefox/<YOUR_PROFILE_FOLDER>/ -A -t "C,," -n localhost.crt -i localhost.crt` - import the certificate into the profile DB.
+3. `certutil -d $HOME/.mozilla/firefox/<YOUR_PROFILE_FOLDER>/ -L` — this is just to list the profile DB.
+4. go to `about:preferences`, find *Certificates* section (in **Security**) and open *View Certificates...*. In the *Authorities* tab the certificate should be present.
+
+### Making certificate trusted in Windows
+
+First, export the `.crt` certificate file from the certificate dialog, which appears after clicking button `View site information` in the Chrome URL field. The `Copy to file` button is located in the tab `Details`. Now you can make it trusted.
+
+1. Start the Microsoft Management Console by running `mmc` command in Powershell.
+2. Enter the `File` menu and select `Add/Remove Snap In`.
+3. Choose `Certificates Snap-In` and add it to the selected. Choose `Computer account` in the following wizard.
+
+![Windows MMC certificates snap-in](images/12-windows-add-certificates-mmc-snap-in.png)
+
+4. Now you can  view your certificates in the MMC snap-in. Select `Console Root` in the left pane, then expand `Certificates (Local Computer)`. Under `Trusted Root Certification Authorities` you can import new certificate file (.crt).
+
+![Windows MMC Root CA certificate import](images/13-windows-add-to-trusted-root-CA.png)
+
+5. Now refresh the Chrome page using `Ctrl+F5`. Things should be fine.
+
+### Making certificate trusted in Android and iOS
+
+1. Generate certificate request from `localhost.pem` and `localhost.key`
+
+`openssl x509 -x509toreq -in localhost.pem -out localhost.csr -signkey localhost.key`
+
+2. Generate `CA.crt` from certificate request with special options
+
+`openssl x509 -req -days 1024 -in localhost.csr -signkey localhost.key -extfile ./android_options.txt -out CA.crt`
+
+ where `android_options.txt` has only one line: `basicConstraints=CA:true`
+
+3. Convert it to DER form
+
+`openssl x509 -inform PEM -outform DER -in CA.crt -out CA.der.crt`
+
+4. Place `CA.der.crt` to Android `/sdcard` location or download file in iOS
+
+5. iOS: `Settings` -> `General` -> `Profile` -> `localhost` -> install it
+
+6. iOS: `Settings` -> `General` -> `Certificate Trust Settings` -> localhost -> enable full trust
+
+7. Android: `Settings` -> `Adittional Settings` -> `Privacy` -> `Credential Storage` -> `Install from storage`
+
+8. Android (check): `Settings` -> `Adittional Settings` -> `Privacy` -> `Credential Storage` -> `Trusted Credentials` -> `User` -> localhost
 
 
 ## Sendria (SMTP server)
