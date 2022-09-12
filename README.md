@@ -86,7 +86,7 @@ Put file `settings.xml` into the directory for your local Maven repo, which usua
     - `mvn install:install-file -Dfile=tg-application-archetype-1.4.6-SNAPSHOT.jar -DpomFile=pom.xml`
 
 2. Update local archetype catalog: `mvn archetype:update-local-catalog`
-3. Generate the project structure. This can be done from any directory you want. Directory `airport` will be generated.
+3. Now we need to generate the project structure. This should be done from **another directory** (NOT from `tg-archetype` and NOT from this cloned repository). So simply go create a new directory somewhere like `Desktop/system-analysis` and run the following command inside it. A new directory `airport` will be generated upon running this command.
 
 For Linux and macOS:
 ```
