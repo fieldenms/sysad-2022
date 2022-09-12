@@ -13,7 +13,7 @@ git clone https://github.com/fieldenms/sysad-2022
 We will be using Java 17. You can check your Java version by running the following command on the console: `java --version`.
 If your version is lower or if you haven't got Java on your machine at all, then install it using one of the following links:
 
-- [Windows](https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.4.1%2B1/OpenJDK17U-jdk_x64_windows_hotspot_17.0.4.1_1.msi)
+- [Windows](https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.4.1%2B1/OpenJDK17U-jdk_x64_windows_hotspot_17.0.4.1_1.msi) - enable the option that says *Set JAVA_HOME variable*.
 - [macOS](https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.4.1%2B1/OpenJDK17U-jdk_x64_mac_hotspot_17.0.4.1_1.pkg)
 - [Linux](https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.4.1%2B1/OpenJDK17U-jdk_x64_linux_hotspot_17.0.4.1_1.tar.gz)
 
@@ -22,6 +22,13 @@ What you are installing is a distribution of OpenJDK from [Adoptium](https://ado
 Next, you need to set the `JAVA_HOME` environment variable.
 
 - Windows - the installer should have done this for you if you enabled the option related to `JAVA_HOME`.
+    
+    If it hadn't, then you have to do it [manually](https://docs.oracle.com/en/cloud/saas/enterprise-performance-management-common/diepm/epm_set_java_home_104x6dd63633_106x6dd6441c.html). 
+    The JDK was probably installed at `C:\Program Files\Eclipse Adoptium\jdk-17.0.4.101-hotspot`.
+
+    Make sure that `JAVA_HOME` and `Path` are set correctly:
+
+    ![Windows 10 JAVA_HOME and Path settings](images/win10-java_home-and-path.png)
 - macOS
     
     The default shell might be either `bash` or `zsh`, so simply update both of them by runing the following 2 commands:
@@ -36,7 +43,7 @@ Next, you need to set the `JAVA_HOME` environment variable.
     
     First, unpack the archive you downloaded with `tar -xf PATH_TO_ARCHIVE`. This will create a directory `jdk-17.0.4.1+1` in the current one. You can move it to a suitable location if you want.
     
-    The default shell might be either `bash` or `zsh`, so simply update both of them by runing the following 2 commands, replacing `PATH_TO_JKD_DIR` with the path where your **unpacked** archive is:
+    The default shell might be either `bash` or `zsh`, so simply update both of them by runing the following 2 commands, replacing `PATH_TO_JKD_DIR` with the path to `jdk-17.0.4.1+1`:
     ```
     printf 'export JAVA_HOME="PATH_TO_JDK_DIR"\nexport PATH="$PATH:$JAVA_HOME/bin"' >> ~/.bashrc
     ```
