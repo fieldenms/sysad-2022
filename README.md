@@ -1,5 +1,8 @@
 ## Systems Analysis and Design 2022
 
+### FAQ
+For Frequently Asked Questions and troubleshooting go to [FAQ](faq/FAQ.md).
+
 ### Initial environment setup
 First of all, clone this repository to a suitable location on your machine:
 ```
