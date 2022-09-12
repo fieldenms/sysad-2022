@@ -38,6 +38,8 @@ Maven can be downloaded [here](https://maven.apache.org/download.cgi). Grab the 
     export PATH="/home/username/maven/bin:$PATH"
     ```
 
+Verify your installation with `mvn -version`.
+
 More information:
 
 - [https://maven.apache.org/install.html](https://maven.apache.org/install.html)
