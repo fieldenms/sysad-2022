@@ -124,16 +124,26 @@ Note that `-DemailSmtp` points to `localhost`. We will be running a local SMTP s
 ```
 mvn eclipse:eclipse -DdownloadSources -DdownloadJavadoc
 ```
-
 `-DdownloadSources` and `-DdownloadJavadoc` options will allow you to browse the source code and documentation of project dependencies.
 
-6. Import the project into Eclipse.
+#### Download and install Eclipse IDE
+- [Windows](https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2022-06/R/eclipse-java-2022-06-R-win32-x86_64.zip)
+    
+    Note that this is not an installer program, but a zip archive that contains the program. 
+    You should unzip it after downloading and put the resulting directory somewhere suitable on your system, e.g. on your Desktop.
+    To launch Eclipse simply open that directory and start `eclipse.exe`.
+- [macOS](https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2022-06/R/eclipse-java-2022-06-R-macosx-cocoa-x86_64.dmg)
+- [Linux](https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2022-06/R/eclipse-java-2022-06-R-linux-gtk-x86_64.tar.gz)
+
+
+#### Importing projects into Eclipse
+1. Import the `airport` project into Eclipse.
     - Open Eclipse IDE.
     - *File->Import->Existing Maven Projects*.
     - Set *Root Directory* to the `airport` directory.
     - *Finish*.
 
-7. Configure run configurations for Eclipse.
+2. Configure run configurations for Eclipse.
     - Open Eclipse IDE.
     - Open a file named `PopulateDb.java`. It's located under `airport-web-server/src/main/java` inside `helsinki.dev_mod.util` package. You can also use `Ctrl+Shift+T` (`Cmd+Shift+T` on macOS) to find it quickly.
     - Right click -> *Run As* -> *Run Configurations* -> *New launch configuration* -> *Arguments* tab. 
@@ -156,9 +166,12 @@ mvn eclipse:eclipse -DdownloadSources -DdownloadJavadoc
 We will be using a plugin that makes development of TG applications more convenient.
 To install it you need to copy the `*.jar` files that can be found [here](dropins) to a directory named `dropins` in your local Eclipse installation.
 
-For macOS a file `Eclipse.app` should be located in `/Applications`. You can also find it using the standard `Finder` program inside `Applications`. Then right-click and *Show Package Contents*. 
+- Windows guys, remeber when we told you to put the unzipped Eclipse folder somewhere suitable? I hope you remember where it was. Now go there and open it. There should be a `dropins` directory inside.
 
+- macOS guys, a file `Eclipse.app` should be located in `/Applications`. You can also find it using the standard `Finder` program inside `Applications`. Then right-click and *Show Package Contents*. 
 Put the `*.jar` files inside `Contents/Eclipse/dropins`. Eclipse needs to be restarted for plugins to be loaded.
+
+- Linux guy, the same goes for you, find your local eclipse installation and there should be a `dropins` directory inside.
 
 #### TG Eclipse templates
 TG templates for Eclipse provide convenient code snippets to facilitate definition of entity properties and EQL queries.
