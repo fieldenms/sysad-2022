@@ -49,7 +49,7 @@ More information:
 File [`settings.xml`](tg-maven-settings/settings.xml) needs to have section `<server>` completed by specifying `<username>` and `<password>`, which should be your GitHub username and a personal token generated using GitHub.
 Such token should be generated with option `read:packages` using *GitHub->Settings->Developer settings->Personal* access tokens menu.
 
-Put file `settings.xml` into the directory for your local Maven repo, which usually is ~/.m2. Symbol ~ stands for the user home directory. Under Windows, this would be `C:\Users\<username>\.m2\`.
+Put file `settings.xml` into the directory for your local Maven repo, which usually is `~/.m2`. Symbol `~` stands for the user home directory. Under Windows, this would be `C:\Users\<username>\.m2\`.
 
 #### TG archetype
 1. Navigate to the directory with the archetype that contains jar and pom files to install the archetype locally on your system.
