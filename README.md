@@ -29,6 +29,15 @@ Maven can be downloaded [here](https://maven.apache.org/download.cgi). Grab the 
 - macOS installation instructions - [here](https://www.digitalocean.com/community/tutorials/install-maven-mac-os) (skip the *install Java* part).
 - Linux installation instructions (I doubt you need them :)) - [here](https://maven.apache.org/install.html)
 
+    Edit your `~/.bash_profile` to include the following line:
+    ```
+    export PATH="<YOUR_MAVEN_DIRECTORY/bin>:$PATH"
+    ```
+    For example, if you downloaded maven and unzipped it to `/home/username/maven`, then:
+    ```
+    export PATH="/home/username/maven/bin:$PATH"
+    ```
+
 More information:
 
 - [https://maven.apache.org/install.html](https://maven.apache.org/install.html)
