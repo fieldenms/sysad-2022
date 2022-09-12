@@ -16,9 +16,38 @@ If your version is lower or if you haven't got Java on your machine at all, then
 
 What you are installing is a distribution of OpenJDK from [Adoptium](https://adoptium.net/temurin/releases).
 
-Note for Linux users: don't forget to set the `JAVA_HOME` environment variable.
+Next, you need to set the `JAVA_HOME` environment variable.
 
-After the installation is done, you can verify it by running `java --version`.
+- Windows - the installer should have done this for you if you enabled the option related to `JAVA_HOME`.
+- macOS
+    
+    The default shell might be either `bash` or `zsh`, so simply update both of them by runing the following 2 commands:
+    ```
+    printf 'export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home"\nexport PATH="$PATH:$JAVA_HOME/bin"' >> ~/.bashrc
+    ```
+    ```
+    printf 'export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home"\nexport PATH="$PATH:$JAVA_HOME/bin"' >> ~/.zshrc
+    ```
+    Restart the terminal for the changes to take effect.
+- Linux
+    
+    First, unpack the archive you downloaded with `tar -xf PATH_TO_ARCHIVE`. This will create a directory `jdk-17.0.4.1+1` in the current one. You can move it to a suitable location if you want.
+    
+    The default shell might be either `bash` or `zsh`, so simply update both of them by runing the following 2 commands, replacing `PATH_TO_JKD_DIR` with the path where your **unpacked** archive is:
+    ```
+    printf 'export JAVA_HOME="PATH_TO_JDK_DIR"\nexport PATH="$PATH:$JAVA_HOME/bin"' >> ~/.bashrc
+    ```
+    ```
+    printf 'export JAVA_HOME="PATH_TO_JDK_DIR"\nexport PATH="$PATH:$JAVA_HOME/bin"' >> ~/.zshrc
+    ```
+    Restart the terminal for the changes to take effect.
+    
+After the installation is done, you can verify it by running `java --version`. The output should look similar to the following:
+```
+openjdk 17.0.4.1 2022-08-12
+OpenJDK Runtime Environment Temurin-17.0.4.1+1 (build 17.0.4.1+1)
+OpenJDK 64-Bit Server VM Temurin-17.0.4.1+1 (build 17.0.4.1+1, mixed mode, sharing)
+```
 
 #### Maven
 [Apache Maven](https://maven.apache.org/) is a build system for Java projects that we will be using. If you haven't got Maven on your machine, then you need to install it.
