@@ -146,7 +146,7 @@ mvn eclipse:eclipse -DdownloadSources -DdownloadJavadoc
 2. Configure run configurations for Eclipse.
     - Open Eclipse IDE.
     - Open a file named `PopulateDb.java`. It's located under `airport-web-server/src/main/java` inside `helsinki.dev_mod.util` package. You can also use `Ctrl+Shift+T` (`Cmd+Shift+T` on macOS) to find it quickly.
-    - Right click -> *Run As* -> *Run Configurations* -> *New launch configuration* -> *Arguments* tab. 
+    - Right click -> *Run As* -> *Run Configurations* -> *Java Application* -> *New launch configuration* (Left-upper corner, the first icon) -> *Arguments* tab. 
     - In the *VM arguments* text box enter:
     ```
     -Dlog4j.configurationFile=src/main/resources/log4j2.xml
