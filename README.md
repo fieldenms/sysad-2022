@@ -127,11 +127,13 @@ Note that `-DemailSmtp` points to `localhost`. We will be running a local SMTP s
     - `cd airport`
     - `mvn clean compile`
 
+<!--
 5. Generate project files for the Eclipse IDE in order for this project to be recognizable.
 ```
 mvn eclipse:eclipse -DdownloadSources -DdownloadJavadoc
 ```
 `-DdownloadSources` and `-DdownloadJavadoc` options will allow you to browse the source code and documentation of project dependencies.
+-->
 
 #### Download and install Eclipse IDE
 - [Windows](https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2022-06/R/eclipse-java-2022-06-R-win32-x86_64.zip)
