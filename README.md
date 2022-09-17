@@ -171,6 +171,20 @@ mvn eclipse:eclipse -DdownloadSources -DdownloadJavadoc
     There is also a class named `Start`, but we will be starting over `HTTP`, since we will be using `HAProxy` to make our web application recognized as *legitimate* by the web browser.
     More on that later in this note.
 
+3. Enable annotation processing in Eclipse.
+    a. In the *Package Explorer* pane on the left select `airport-pojo-bl` project:
+
+    ![Selecting airport-pojo-bl](images/01-eclipse-apt.png)
+
+    b. Right-click on it -> *Properties*. 
+    c. Navigate to *Java Compiler* -> *Annotation Processing*, tick the box *Enable project specific settings*, then hit *Apply and Close* and finally *Yes*.
+    
+    ![Enabling project specific settings](images/02-eclipse-apt.png)
+
+    ![Yes](images/03-eclipse-apt.png)
+
+    This should resolve the compilation errors.
+
 #### TG Eclipse plugin
 We will be using a plugin that makes development of TG applications more convenient.
 To install it you need to copy the `*.jar` files that can be found [here](dropins) to a directory named `dropins` in your local Eclipse installation.
