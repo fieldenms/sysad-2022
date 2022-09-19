@@ -24,4 +24,4 @@ How to fix it:
 4. Select `airport-pojo-bl/target/generated-sources`.
 5. Hit *Remove* and *Apply and Close*.
 
-![Fixing the problem with Java Build Path](images/metamodels-build-path.png)
+![Fixing the problem with Java Build Path](images/fix-metamodels-build-path.png)
