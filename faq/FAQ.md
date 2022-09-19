@@ -10,3 +10,18 @@ If you experience the following error during step 3 (project generation):
 Then you are probably running the command while being inside the `tg-archetype` directory. To resolve it you should step out of `tg-archetype` and the cloned repository entirely. Instead go and create a new directory somewhere on your computer, e.g. on your Desktop. Let's say you named it `system-analysis`.
 
 Then, in your terminal go to that newly created directory, e.g. `cd C:\%HOMEPATH%\Desktop\system-analysis` (Windows) or `cd ~/Desktop/system-analysis` (macOS/Linux). Once you are there just run that long command again which generates the project structure.
+
+
+#### Eclipse-related problems
+If you have the following problem in the project `airport-pojo-bl`, then you must have used the `mvn eclipse:eclipse` command, which was later excluded from the instructions for the sake of simplicity.
+
+![Problem with Java Build Path](images/metamodels-build-path.png)
+
+How to fix it:
+1. In *Package Explorer* select `airport-pojo-bl` and right-click, then choose *Properties*.
+2. Open *Java Build Path*.
+3. In the tab panel select *Source* tab.
+4. Select `airport-pojo-bl/target/generated-sources`.
+5. Hit *Remove* and *Apply and Close*.
+
+![Fixing the problem with Java Build Path](images/metamodels-build-path.png)
