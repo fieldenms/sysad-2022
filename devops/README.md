@@ -15,7 +15,7 @@ It will create databases `tg_local`, and `test_db_1` .. `test_db_4`.  SQL script
 _This only needs to be done once (unless the version of PostgreSQL is updated)._
 
 1. Start a shell or command prompt and navigate to the `docker` directory.
-2. Run script `rebuild.sh`.
+2. Run script `rebuild.sh` (macos/Linux) or `rebuild.bat` (Windows).
 
 Sample output from this script:
 
@@ -44,7 +44,7 @@ Successfully tagged fieldentech/postgresql:14.2
 
 ### Starting the container
 1. Start a shell or command prompt and navigate to the `scripts` directory.
-2. Run script `start.sh`.
+2. Run script `start.sh` (macos/Linux) or `start.bat` (Windows).
 
 After a few seconds (or longer, depending on host load), a message like `2021-02-25 04:46:00.826 UTC [1] LOG:  database system is ready to accept connections` should appear - the server is now ready for connections.
 
