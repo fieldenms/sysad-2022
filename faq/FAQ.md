@@ -1,8 +1,8 @@
-## FAQ
+# FAQ
 
-### Initial environment setup
+## Initial environment setup
 
-#### TG archetype
+### TG archetype
 If you experience the following error during step 3 (project generation):
 
 ![Project generation failed](images/tg-archetype-project-gen-fail.png)
@@ -12,7 +12,9 @@ Then you are probably running the command while being inside the `tg-archetype` 
 Then, in your terminal go to that newly created directory, e.g. `cd C:\%HOMEPATH%\Desktop\system-analysis` (Windows) or `cd ~/Desktop/system-analysis` (macOS/Linux). Once you are there just run that long command again which generates the project structure.
 
 
-#### Eclipse-related problems
+### Eclipse-related problems
+
+#### Build path problem
 If you have the following problem in the project `airport-pojo-bl`, then you must have used the `mvn eclipse:eclipse` command, which was later excluded from the instructions for the sake of simplicity.
 
 ![Problem with Java Build Path](images/metamodels-build-path.png)
@@ -25,3 +27,9 @@ How to fix it:
 5. Hit *Remove* and *Apply and Close*.
 
 ![Fixing the problem with Java Build Path](images/fix-metamodels-build-path.png)
+
+
+#### MacOS Eclipse canot be opened/quit unexpectedly
+Run this command: `sudo codesign --force --sign - /Applications/Eclipse.app`
+
+[Reference](https://stackoverflow.com/questions/70262544/eclipse-quit-unexpectedly-on-macos).
