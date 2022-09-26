@@ -120,74 +120,16 @@ You could simply make an exception for this domain, but we recommend you to conf
 
 The following steps are required:
 
-1. Generate public/private keys and a self-signed certificate to be used by HAProxy to establish TLS for HTTP(S) and HTTP/2.
-2. Install and configure HAProxy.
-3. Register the certificate as trusted with the operating system.
+1. Install and configure HAProxy.
+2. Register the certificate as trusted with the operating system.
 
-### 1. Generate public/private keys and a self-signed certificate
-This step involves the use of `openssl`, which needs to be installed if it isn't to proceed with this step. For Windows OS `openssl` can be downloaded from [here](https://slproweb.com/products/Win32OpenSSL.html), there is also available version for `Win64`. It is better to choose full version (not `lightweight`) for software developers.
-
-Here is a command (macOS/Linux) that can be used as a template to generate a certificate that will be usable with Chrome and Firefox:
-
-```
-openssl req \
-    -x509 -sha256 \
-    -newkey rsa:4096 \
-    -days 1024 \
-    -nodes \
-    -subj "/C=AU/ST=VIC/O=Fielden/CN=localhost" \
-    -extensions SAN \
-    -reqexts SAN \
-    -config <(cat /etc/ssl/openssl.cnf \
-            <(printf "\n[SAN]\nsubjectAltName=DNS:localhost,DNS:tgdev.com")) \
-    -keyout "localhost.key" \
-    -out "localhost.pem"
-```
-
-Having both values `DNS:localhost` and `DNS:tgdev.com` for `subjectAltName` ensures that accessing either `https://localhost` or `https://tgdev.com` should correctly identify domain names by the web browser.
-Naturally, value `DNS:tgdev.com` can be changed to any other appropriate domain name that you may use for local development. 
-However, remember to use that consistently throughout in all places where `tgdev.com` is referenced in this article.
-
-For Windows PC certificate can be generated with following instruction:
-```
-openssl req ^
-    -x509 -sha256 ^
-    -newkey rsa:4096 ^
-    -days 1024 ^
-    -nodes ^
-    -subj "/C=AU/ST=VIC/O=Fielden/CN=localhost" ^
-    -addext "subjectAltName = DNS:localhost,DNS:tgdev.com" ^
-    -keyout "localhost.key" ^
-    -out "localhost.pem"
-```
-
-There should be two files generated as the result of running the above command -- `localhost.key` and `localhost.pem`. It is a good idea to verify that certificate contains the `subjectAltName`. This can be done by running the following command:
-
-```
-openssl x509 -in ./localhost.pem -text -noout
-```
-
-The output should look like the screen capture below:
-
-![The result of inspecting a pem file.](images/01-openssl-inspect-pem.png)
-
-
-The two generated files need to be concatenated into file `haproxy.pem`, which is going to be used by HAProxy:
-```
-cat ./localhost.pem localhost.key > haproxy.pem
-```
-And for Windows PC:
-```
-type localhost.pem localhost.key >> haproxy.pem
-```
-
-### 2a. Installing and configuring HAProxy
+### 1a. Installing and configuring HAProxy
 HAProxy version 1.9.8 is assumed. Installing HAProxy with Docker is a breeze by running:
 ```
 docker pull haproxy:1.9.8
 ```
 For convenience, directory `devops/haproxy` contains a HAProxy configuration file and a startup script to start/restart it. 
-You should put the certificate you generated `haproxy.pem` inside the `config` directory.
+You should put the certificate `haproxy.pem` inside the `config` directory.
 
 Other files that are present:
 
@@ -196,7 +138,7 @@ Other files that are present:
 3. `docker/linux_start_haproxy.sh` - for **Linux** users.
 4. `docker/start_haproxy.bat` - for **Windows** users.
 
-### 2b. Adjusting `start_haproxy.sh` or `start_haproxy.bat` or `linux_start_haproxy.sh`
+### 1b. Adjusting `start_haproxy.sh` or `start_haproxy.bat` or `linux_start_haproxy.sh`
 
 The startup script contains the command to run HAProxy, which needs to include a mapping between the directory where HAProxy configuration lives locally and inside the running Docker container. Here is an excerpt from the referenced shell script:
 ```
