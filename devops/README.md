@@ -3,7 +3,7 @@ We will be using [Docker](https://www.docker.com/) to run the supporting service
 
 If you are running Linux you can use your package manager or follow the [instructions](https://docs.docker.com/desktop/install/linux-install/). 
 
-Make sure that the installed version is `18.03` or newer.
+Make sure that the **engine** version is `18.03` or newer. Note that engine version is different from Docker Desktop version.
 
 ## PostgreSQL
 All required files are located in [`postgresql`](postgresql).

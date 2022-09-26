@@ -28,8 +28,13 @@ How to fix it:
 
 ![Fixing the problem with Java Build Path](images/fix-metamodels-build-path.png)
 
-
 #### MacOS Eclipse canot be opened/quit unexpectedly
 Run this command: `sudo codesign --force --sign - /Applications/Eclipse.app`
 
 [Reference](https://stackoverflow.com/questions/70262544/eclipse-quit-unexpectedly-on-macos).
+
+
+### Docker
+Windows user may experience the following issue after installing Docker Desktop - [https://superuser.com/questions/1584710/docker-wsl-2-installation-is-incomplete](https://superuser.com/questions/1584710/docker-wsl-2-installation-is-incomplete).
+
+To resolve it carefully follow these [instructions](https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-1---enable-the-windows-subsystem-for-linux) up to Step 6 (don't follow Step 6). Then restart your computer and launch Docker Desktop again. It should be able to start succesfully.
