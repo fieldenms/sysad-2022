@@ -184,19 +184,6 @@ When first time running `haproxy` you should share it with Docker Desktop. After
 
 ![Docker Desktop](images/15-docker_desktop.png).
 
-`--restart=always` option will start `haproxy` when docker starts. Docker Desktop will be added to autostart by default. For Docker Toolbox it is required to provide additional configurations to make it start on PC startup. The next batch commands should be added to autostart folder:
-
-```
-docker-machine start default
-docker run -d ^
-            -p 80:80 -p 443:443 -p 9000:9000^
-            --restart=always^
-            --name haproxy^
-            -v /c/Users/username/haproxy:/usr/local/etc/haproxy:ro^
-            haproxy:1.9.8
-```
-
-The batch file is [`docker/autostart_haproxy.bat`](haproxy/docker/autostart_haproxy.bat)
 
 ### 3. Register the certificate as trusted with the operating system
 
