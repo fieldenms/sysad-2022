@@ -68,16 +68,17 @@ Maven can be downloaded [here](https://maven.apache.org/download.cgi). Grab the 
 - macOS installation instructions - [here](https://www.digitalocean.com/community/tutorials/install-maven-mac-os) (skip the *install Java* part).
 - Linux installation instructions (I doubt you need them :)) - [here](https://maven.apache.org/install.html)
 
-    Edit your `~/.bash_profile` to include the following line:
+    MacOS and Linux users should also edit their `~/.bashrc` to include the following line, replacing `YOUR_MAVEN_DIRECTORY` by the location where you downloaded Maven to.
     ```
-    export PATH="<YOUR_MAVEN_DIRECTORY/bin>:$PATH"
+    export PATH="YOUR_MAVEN_DIRECTORY/bin:$PATH"
     ```
-    For example, if you downloaded maven and unzipped it to `/home/username/maven`, then:
+    For example, if you downloaded maven and unzipped it to `/Users/username/maven` (macOS), then:
     ```
-    export PATH="/home/username/maven/bin:$PATH"
+    export PATH="/Users/username/maven/bin:$PATH"
     ```
+    On Linux that would be `/home` instead of `/Users`.
 
-Verify your installation with `mvn -version`.
+Verify your installation with `mvn -version`. Make sure that `mvn` command is run and that the indicated Java version is 17 or newer.
 
 More information:
 
