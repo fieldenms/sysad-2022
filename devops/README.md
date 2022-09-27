@@ -42,6 +42,8 @@ Successfully built 37c4f9b8fedb
 Successfully tagged fieldentech/postgresql:14.2
 ```
 
+Windows users should run the script without the preceding `./`, i.e., just type `rebuild.bat`.
+
 ### Starting the container
 1. Start a shell or command prompt and navigate to the `scripts` directory.
 2. Run script `start.sh` (macos/Linux) or `start.bat` (Windows).
@@ -50,11 +52,11 @@ After a few seconds (or longer, depending on host load), a message like `2021-02
 
 ### Stopping the container
 1. Start a shell or command prompt and navigate to the `scripts` directory.
-2. Run script `stop.sh`.
+2. Run script `stop.sh` / `stop.bat`.
 
 ### Connecting to the running instance
 1. Start a shell or command prompt and navigate to the `scripts` directory.
-2. Run script `connect.sh`.  Note that this will use PostgreSQL tools inside the container to connect to the `tg_local` database, not the unit test databases.
+2. Run script `connect.sh` / `connect.bat`.  Note that this will use PostgreSQL tools inside the container to connect to the `tg_local` database, not the unit test databases.
 
 Alternatively configure a GUI database management tool to connect to the PostgreSQL instance on host `localhost` (127.0.0.1), port 5432 as user `t32`, connecting to database `tg_local`.
 
