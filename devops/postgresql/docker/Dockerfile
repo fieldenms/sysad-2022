@@ -1,8 +1,9 @@
 FROM postgres:14.2
 EXPOSE 5432
 
-RUN mkdir /opt
+RUN mkdir /opt 2>/dev/null || echo "/opt exists"
 COPY dos2unix /opt/dos2unix
+RUN chmod a+x /opt/dos2unix
 
 RUN mkdir -p /docker-entrypoint-initdb.d
 
