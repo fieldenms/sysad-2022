@@ -89,10 +89,18 @@ Alternatively configure a GUI database management tool to connect to the Postgre
       - VM arguments are:
          - `-DdatabaseUri=//localhost:5432/test_db_1` - specifies the unit test database
          - `-Djava.system.class.loader=ua.com.fielden.platform.classloader.TgSystemClassLoader` - mandatory class loader
-         - `-ea` - something Eclipse adds
+         - `-ea` - enables assertions
          - `--add-opens java.base/java.lang=ALL-UNNAMED` - work-around to avoid a number of warnings for Java 11+
 
    Note that the significant VM argument is `-DdatabaseUri=//localhost:5432/test_db_1`.
+
+   For copying:
+   ```
+   -DdatabaseUri=//localhost:5432/test_db_1
+   -Djava.system.class.loader=ua.com.fielden.platform.classloader.TgSystemClassLoader
+   -ea
+   --add-opens java.base/java.lang=ALL-UNNAMED
+   ```
 
 ### Miscellaneous 
 More information, such as creating users and databases, running custom SQL queries, troubleshooting - [here](postgresql/misc.md).
