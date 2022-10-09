@@ -97,23 +97,6 @@ Alternatively configure a GUI database management tool to connect to the Postgre
 ### Miscellaneous 
 More information, such as creating users and databases, running custom SQL queries, troubleshooting - [here](postgresql/misc.md).
 
-## DBeaver
-[DBeaver](https://dbeaver.io) is a graphical database tool that can be used to browse the database structure, observe the changes and execute queries.
-We recommned you to make the most out of this tool, since it can help you understand how the running application manages data.
-
-Here is how you connect to a running database instance:
-
-![Connect](images/dbeaver/connect.png)
-
-Then you specify connection settings. For example, let's connect to the `tg_local` database that is used for *live data* (as opposed to testing).
-
-![Connection settings](images/dbeaver/connect_settings.png)
-
-To connect to a test database, set *Database:* to `test_db_N`, where `N` is a number of a database you want to connect to (1 to 4).
-Both username and password are `junit`. 
-You can find out more simply by browsing the files and reading configurations.
-
-
 ## HAProxy (for HTTPS)
 All required files are located in [`haproxy`](haproxy).
 
@@ -319,3 +302,19 @@ Directory `docker` contains a startup script `start_sendria.sh` that will launch
 
 That's it! Congratulations on making it this far.
 
+
+## DBeaver
+[DBeaver](https://dbeaver.io) is a graphical database tool that can be used to browse the database structure, observe the changes and execute queries.
+We recommned you to make the most out of this tool, since it can help you understand how the running application manages data.
+
+Here is how you connect to a running database instance:
+
+![Connect](images/dbeaver/connect.png)
+
+Then you specify connection settings. For example, let's connect to the `tg_local` database that is used for *live data* (as opposed to testing).
+
+![Connection settings](images/dbeaver/connect_settings.png)
+
+To connect to a test database, set *Database:* to `test_db_N`, where `N` is a number of a database you want to connect to (1 to 4).
+Both username and password are `junit`. 
+You can find out more simply by browsing the files and reading configurations.
