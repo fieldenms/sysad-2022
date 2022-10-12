@@ -10,7 +10,7 @@ docker rm haproxy
 # for example, /home/username/haproxy
 docker run -d \
            -p 80:80 -p 443:443 -p 9000:9000 \
-           --add-host host.docker.internal:host-gateway
+           --add-host host.docker.internal:host-gateway \
            --restart=always \
            --name haproxy \
            -v <local haproxy config directory>:/usr/local/etc/haproxy:ro \
