@@ -122,14 +122,14 @@ HAProxy version 1.9.8 is assumed. Installing HAProxy with Docker is a breeze by 
 docker pull haproxy:1.9.8
 ```
 For convenience, directory `devops/haproxy` contains a HAProxy configuration file and a startup script to start/restart it. 
-You should put the certificate `haproxy.pem` inside the `config` directory.
 
 Other files that are present:
 
 1. `config/haproxy.cfg`, which is a configuration file for HAProxy.
-2. `docker/start_haproxy.sh`, which is a script to start/restart HAProxy for **macOS** users.
-3. `docker/linux_start_haproxy.sh` - for **Linux** users.
-4. `docker/start_haproxy.bat` - for **Windows** users.
+2. `config/haproxy.pem`, which is a certificate that was already generated.
+3. `docker/start_haproxy.sh`, which is a script to start/restart HAProxy for **macOS** users.
+4. `docker/linux_start_haproxy.sh` - for **Linux** users.
+5. `docker/start_haproxy.bat` - for **Windows** users.
 
 ### 1b. Adjusting `start_haproxy.sh` or `start_haproxy.bat` or `linux_start_haproxy.sh`
 
@@ -152,8 +152,6 @@ docker run -d \
            haproxy:1.9.8
 ```
 Please note also the use of option `--restart=always`. It means that HAProxy will be started automatically upon crashes and Docker or computer restarts. Remove this option if it is preferred to start/stop HAProxy manually. For more details refer Docker [documentation](https://docs.docker.com/config/containers/start-containers-automatically/).
-
-And as the last step, make the script executable by running `chmod +x start_haproxy.sh`.
 
 #### Note on running `haproxy` with Docker Desktop
 When running haproxy via Docker Desktop the error might happen. The error is in the screenshot in the red rectangle.
