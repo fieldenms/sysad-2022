@@ -102,6 +102,11 @@ Alternatively configure a GUI database management tool to connect to the Postgre
    --add-opens java.base/java.lang=ALL-UNNAMED
    ```
 
+   If no tests are run and you are getting a message that says *"No tests were found"*, don't worry, it's fine.
+   Eclipse seems to be confused when you try to test the whole package and is unable to find individual tests.
+   This will not pose a problem, since you should be able to run individual tests.
+   This is done in the same way, but you should select *Run a single test* and specify the test class you want to run when creating a run configuration.
+
 ### Miscellaneous 
 More information, such as creating users and databases, running custom SQL queries, troubleshooting - [here](postgresql/misc.md).
 
