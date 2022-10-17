@@ -1,5 +1,20 @@
 ## Systems Analysis and Design 2022
 
+### Important modification that has to be applied manually
+Inside the generated `airport` project open `airport-web-server/application.properties` file and replace lines 48-52 with the following: 
+```
+hibernate.connection.url=jdbc:postgresql://localhost:5432/tg_local
+hibernate.connection.driver_class=org.postgresql.Driver
+hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+hibernate.connection.username=t32
+hibernate.connection.password=t32
+```
+
+This should resolve the issue with being uable to start the web server using `StartOverHttp`.
+Specifically, if you encountered an error that said: `FATAL: Password authentication failed for user 'sa'*` it was due to the misconfiguration during the project generation phase.
+After performing the above modification, please make sure that you can launch `StartOverHttp`. 
+Also don't forget that the database and HAProxy Docker containers have to be running before starting the web server.
+
 ### FAQ
 For Frequently Asked Questions and troubleshooting go to [FAQ](faq/FAQ.md).
 
