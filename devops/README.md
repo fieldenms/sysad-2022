@@ -156,6 +156,12 @@ docker run -d \
            -v /home/username/sysad-2022/devops/haproxy/config:/usr/local/etc/haproxy:ro \
            haproxy:1.9.8
 ```
+
+NOTE: If your path contains spaces then it needs to be wrapped in double quotes. For example:
+```
+-v "/home/username/system analysis/and-the-rest:/usr/local/etc/haproxy:ro"
+```
+
 Please note also the use of option `--restart=always`. It means that HAProxy will be started automatically upon crashes and Docker or computer restarts. Remove this option if it is preferred to start/stop HAProxy manually. For more details refer Docker [documentation](https://docs.docker.com/config/containers/start-containers-automatically/).
 
 #### Note on running `haproxy` with Docker Desktop
