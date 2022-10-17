@@ -257,6 +257,7 @@ This is it -- refresh the page in Chrome (may need to restart it) and the privac
 
 For Firefox users running Linux: Firefox does not have a 'central' location where it looks for certificates. It just looks into the current profile ([reference](https://askubuntu.com/questions/244582/add-certificate-authorities-system-wide-on-firefox)).
 
+1. Go to `about:config` in Firefox and create the following boolean value, setting it to `true`: `security.enterprise_roots.enabled`.
 2. `certutil -d $HOME/.mozilla/firefox/<YOUR_PROFILE_FOLDER>/ -A -t "C,," -n localhost.crt -i localhost.crt` - import the certificate into the profile DB.
 3. `certutil -d $HOME/.mozilla/firefox/<YOUR_PROFILE_FOLDER>/ -L` — this is just to list the profile DB.
 4. go to `about:preferences`, find *Certificates* section (in **Security**) and open *View Certificates...*. In the *Authorities* tab the certificate should be present.
