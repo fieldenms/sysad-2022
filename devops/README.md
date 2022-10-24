@@ -272,17 +272,12 @@ For Firefox users running Linux: Firefox does not have a 'central' location wher
 
 First, export the `.crt` certificate file from the certificate dialog, which appears after clicking button `View site information` in the Chrome URL field. The `Copy to file` button is located in the tab `Details`. Now you can make it trusted.
 
-1. Start the Microsoft Management Console by running `mmc` command in Powershell.
-2. Enter the `File` menu and select `Add/Remove Snap In`.
-3. Choose `Certificates Snap-In` and add it to the selected. Choose `Computer account` in the following wizard.
-
-![Windows MMC certificates snap-in](images/12-windows-add-certificates-mmc-snap-in.png)
-
-4. Now you can  view your certificates in the MMC snap-in. Select `Console Root` in the left pane, then expand `Certificates (Local Computer)`. Under `Trusted Root Certification Authorities` you can import new certificate file (.crt).
-
-![Windows MMC Root CA certificate import](images/13-windows-add-to-trusted-root-CA.png)
-
-5. Now refresh the Chrome page using `Ctrl+F5`. Things should be fine.
+1. Open *Internet Options*, which can be found through Windows Search.
+2. Select *Content* tab.
+3. Open *Certificates..*.
+4. Select *Trusted Root Certification Authorities* tab.
+5. Import the certificate file by clicking *Import*.
+6. Open `tgdev.com` Chrome, preferaby starting a new session.
 
 ### Making certificate trusted in Android and iOS
 
