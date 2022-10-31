@@ -315,6 +315,10 @@ Directory `docker` contains a startup script `start_sendria.sh` that will launch
 
 That's it! Congratulations on making it this far.
 
+## Using the system
+After configuring and starting all necessary services, head over to `tgdev.com` and login with the default credentials:
+- login: `SU`
+- password: `cooking with rocket fuel`
 
 ## DBeaver
 [DBeaver](https://dbeaver.io) is a graphical database tool that can be used to browse the database structure, observe the changes and execute queries.
