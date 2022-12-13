@@ -88,7 +88,6 @@ Alternatively configure a GUI database management tool to connect to the Postgre
       - running all tests (although the same settings apply if running only a single test)
       - VM arguments are:
          - `-DdatabaseUri=//localhost:5432/test_db_1` - specifies the unit test database
-         - `-Djava.system.class.loader=ua.com.fielden.platform.classloader.TgSystemClassLoader` - mandatory class loader
          - `-ea` - enables assertions
          - `--add-opens java.base/java.lang=ALL-UNNAMED` - work-around to avoid a number of warnings for Java 11+
 
@@ -97,7 +96,6 @@ Alternatively configure a GUI database management tool to connect to the Postgre
    For copying:
    ```
    -DdatabaseUri=//localhost:5432/test_db_1
-   -Djava.system.class.loader=ua.com.fielden.platform.classloader.TgSystemClassLoader
    -ea
    --add-opens java.base/java.lang=ALL-UNNAMED
    ```

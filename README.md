@@ -175,7 +175,6 @@ mvn eclipse:eclipse -DdownloadSources -DdownloadJavadoc
     - In the *VM arguments* text box enter:
     ```
     -Dlog4j.configurationFile=src/main/resources/log4j2.xml
-    -Djava.system.class.loader=ua.com.fielden.platform.classloader.TgSystemClassLoader
     --add-opens java.base/java.lang=ALL-UNNAMED
     ```
     - Do the same for `StartOverHttp.java`, which is located under `airport-web-server/src/main/java` inside `helsinki.webapp` package.
