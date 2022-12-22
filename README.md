@@ -1,5 +1,8 @@
 ## Systems Analysis and Design 2022
 
+### Main project
+For details related to the main project visit the [Main project](main-project/MainProject.md) page.
+
 ### Important modification that has to be applied manually
 Inside the generated `airport` project open `airport-web-server/application.properties` file and replace lines 48-52 with the following: 
 ```
